@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PassengerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">aviao</a> &gt; <a href="index.source.html" class="el_package">org.example.services</a> &gt; <span class="el_source">PassengerService.java</span></div><h1>PassengerService.java</h1><pre class="source lang-java linenums">package org.example.services;
+
+import java.util.regex.Pattern;
+
+<span class="fc" id="L5">public class PassengerService {</span>
+    public int soma;
+    public int primeiroDigitoVerificador;
+    public int segundoDigitoVerificador;
+
+    public boolean validarCpf(String cpf) {
+<span class="fc" id="L11">        cpf = cpf.replaceAll(&quot;\\D&quot;, &quot;&quot;);</span>
+<span class="pc bpc" id="L12" title="1 of 4 branches missed.">        if (cpf.length() != 11 || cpf.matches(&quot;(\\d)\\1{10}&quot;)) return false;</span>
+
+<span class="fc" id="L14">        soma = 0;</span>
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L16">            soma += (cpf.charAt(i) - '0') * (10 - i);</span>
+        }
+<span class="fc" id="L18">        primeiroDigitoVerificador = 11 - (soma % 11);</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        primeiroDigitoVerificador = primeiroDigitoVerificador &gt;= 10 ? 0 : primeiroDigitoVerificador;</span>
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (primeiroDigitoVerificador != cpf.charAt(9) - '0') return false;</span>
+
+<span class="fc" id="L22">        soma = 0;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc" id="L24">            soma += (cpf.charAt(i) - '0') * (11 - i);</span>
+        }
+<span class="fc" id="L26">        segundoDigitoVerificador = 11 - (soma % 11);</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        segundoDigitoVerificador = segundoDigitoVerificador &gt;= 10 ? 0 : segundoDigitoVerificador;</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        return segundoDigitoVerificador == cpf.charAt(10) - '0';</span>
+    }
+
+    public boolean validarEmail(String email) {
+<span class="fc" id="L32">        String padraoEmail = &quot;^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$&quot;;</span>
+<span class="fc" id="L33">        return Pattern.matches(padraoEmail, email);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -1,24 +1,24 @@
 package org.example;
 
-import org.example.entities.Passageiro;
-import org.example.facade.PassageiroFacade;
+import org.example.entities.Passenger;
+import org.example.facade.PassengerFacade;
 
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        PassageiroFacade facade = new PassageiroFacade();
+        PassengerFacade facade = new PassengerFacade();
         Scanner sc = new Scanner(System.in);
-        int opcao;
+        int option;
 
         do {
             System.out.println("\n1 - Cadastrar passageiro");
             System.out.println("2 - Listar passageiros");
             System.out.println("3 - Sair");
-            System.out.print("Opção: ");
-            opcao = Integer.parseInt(sc.nextLine());
+            System.out.print("Opção: \n");
+            option = Integer.parseInt(sc.nextLine());
 
-            switch (opcao) {
+            switch (option) {
                 case 1 -> {
                     System.out.print("Nome: ");
                     String nome = sc.nextLine();
@@ -30,11 +30,11 @@ public class App {
                     System.out.println(sucesso ? "Cadastrado com sucesso!" : "Dados inválidos!");
                 }
                 case 2 -> {
-                    for (Passageiro p : facade.listar()) {
+                    for (Passenger p : facade.list()) {
                         System.out.printf("%d - %s - %s - %s\n", p.getId(), p.getNome(), p.getCpf(), p.getEmail());
                     }
                 }
             }
-        } while (opcao != 3);
+        } while (option != 3);
     }
 }
